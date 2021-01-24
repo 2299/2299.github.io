@@ -1,3 +1,40 @@
+.header {
+  color: #fff;
+}
+body {
+  background-color: #222226;
+}
+.logo {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.header-text {
+  font-size: 58px;
+  font-weight: 700;
+  letter-spacing: 0em;
+}
+.subheader-text {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.game-title {
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.game-info {
+  font-size: 12px;
+}
+
+.detailed-info {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.footer {
+  font-size: 12px;
+}
 #loader-wrapper {
     position:fixed;
     top:0;
@@ -141,9 +178,39 @@
     display: flex;
     -webkit-box-flex: 1;
   }
-  .header {
-    color: #fff;
-  }
-  body {
-    background-color: #222226;
-  }
+input[type="search"] {
+  /* width: 300px; */
+  border-radius: 25px;
+  -webkit-transition: .35s ease-in-out;
+  transition:  .35s ease-in-out;
+
+  
+}
+/* input[type="search"]:focus {
+  width: 1000px;
+  border-radius: 40px;
+  outline: 0;
+} */
+
+#myBtn {
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.5s linear;
+  width: 50px;
+  position: fixed; /* Fixed/sticky position */
+  bottom: 30px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #333332; /* Set a background color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+}
+
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+#myBtn:focus {
+  border: 0;
+}

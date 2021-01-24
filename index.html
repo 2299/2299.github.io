@@ -17,49 +17,70 @@
     <div class="loader-section section-right"></div>
   </div> -->
 
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand logo">ИгроПОИСК</a>
+      <form class="d-flex">
+        <input class="form-control me-2 input-search" type="search" id="gameNumber">
+        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#viewgamedata"
+          aria-expanded="false" aria-controls="viewgamedata" id="button-addon2"
+          onclick="getCurrentGameData()">Найти</button>
+      </form>
+    </div>
+  </nav>
+
   <div class="container">
-    <div class="header">
+    <!-- <header class="header">
       <h5 class="display-4">ИгроПОИСК</h5>
       <p class="lead">На данный момент <b id="quantityGames"></b>игр в базе данных</p>
-    </div>
-    <div class="input-group input-group-sm mb-3">
-      <input type="text" class="form-control" id="gameNumber"/>
-      <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#viewgamedata" aria-expanded="false" aria-controls="viewgamedata" id="button-addon2" onclick="getCurrentGameData()">Выполнить</button>
-      <!-- <button class="btn btn-primary" onclick="deleteBlock()">Удалить блок</button> -->
-    </div>
-  </p>
-  <div class="collapse" id="viewgamedata" style="color: white;">
-    <div class="card card-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-    </div>
-  </div>
-
-    <div id="row-before" class="row row-cols-1 row-cols-md-2 g-4">
-      <!-- <div class="card bg-dark text-white">
-      <img id="image-url" src="https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg" class="card-img" alt="...">
-      <div class="card-img-overlay">
-        <h5 class="card-title" style="background-color: #006eff6b;" id="game-name">Card title</h5>
+      <div class="input-group input-group-sm mb-3">
+        <input type="text" class="form-control" id="gameNumber" />
+        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#viewgamedata"
+          aria-expanded="false" aria-controls="viewgamedata" id="button-addon2"
+          onclick="getCurrentGameData()">Выполнить</button>
       </div>
-      </div> -->
-
-      <!-- <div class="card" style="width: 40%;">
-        <img id="image-url" src="https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg" alt="" class="card-img-top">
-        <div class="card-body">
-          <h2 class="card-title" id="game-name">Destiny 2</h2>
-          <a href="#" class="btn btn-primary">Подробнее</a>
-        </div>
-      </div> -->
+    </header> -->
+    <div class="header">
+      <h5 class="display-4 header-text">ИгроПОИСК</h5>
+      <p class="lead subheader-text">Добавляй в избранное, комментируй, делись с друзьями!</p>
     </div>
-    <button disabled type="button" id="previousButton" class="btn btn-lg btn-secondary"
-    onclick="updateBlock('previous')" href="#" aria-label="Предыдущая страница">
-    <span aria-hidden="true">Предыдущая страница</span>
-  </button>
+    <div class="collapse" id="viewgamedata" style="color: white;">
+      <div class="card card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
+        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+      </div>
+    </div>
 
-  <button type="button" href="#" class="btn btn-lg btn-secondary" onclick="updateBlock('next')" href="#"
-    aria-label="Следующая страница">
-    <span aria-hidden="true">Следующая страница</span>
-  </button>
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="col-before"></div>
+    <!-- Buttons -->
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <button disabled type="button" id="previousButton" class="btn btn-lg btn-secondary"
+        onclick="updateBlock('previous')" href="#" aria-label="Предыдущая страница">
+        <span aria-hidden="true">Предыдущая страница</span>
+      </button>
+      <!-- ----------------- -->
+      <button type="button" href="#" class="btn btn-lg btn-secondary" onclick="updateBlock('next')" href="#"
+        aria-label="Следующая страница">
+        <span aria-hidden="true">Следующая страница</span>
+      </button>
+    </div>
+
+    <footer class="text-muted py-5 footer">
+      <hr>
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Наверх</a>
+        </p>
+        <p class="mb-1">GamePOISK. Created via API <a href="rawg.io">RAWG.IO </a></p>
+        <p class="mb-0">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+      </div>
+    </footer>
   </div>
+  <a class="btn btn-secondary" href="#" id="myBtn" role="button">
+    <img src="/img/up-arrow.svg" alt="...">
+  </a>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/index.js"></script>
