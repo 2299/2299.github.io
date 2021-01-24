@@ -10,6 +10,30 @@ async function getGamesData(page) {
     console.log(data);
     return data
 }
+
+let getCurrentGameData = function() {
+  let url = 'https://api.rawg.io/api/games/'
+  let id = document.getElementById("gameNumber").value;
+
+  fetch(url+id)
+    .then(response => response.json())
+    .then(data => document.getElementById('viewgamedata').innerHTML = 
+    `<div class="card text-white bg-dark mb-3" style="">
+      <img src="${data.background_image}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${data.name}</h5>
+        <p class="card-text">${data.description}</p>
+      </div>
+      <ul class="list-group list-group-flush ">
+        <li class="list-group-item text-white bg-dark">Рейтинг сайта - ${data.rating} </li>
+      </ul>
+      <div class="card-body">
+        <a href="${(data.website.length > 1) ? data.website +  '"class="card-link">Ссылка на сайт игры</a>' : '#"class="card-link">Нет веб-сайта </a>'}
+        <a href="${(data.metacritic_url.length > 1) ? data.metacritic_url + '"class="card-link">Ссылка на MetaCritic</a> '  : '#"class="card-link">Нет страницы на Metacritic </a>'} 
+      </div>
+    </div>`);
+    
+}
 //Декоратор для загрузки данных с https://api.rawg.io/api/games
 function cachingDecorator(func) {
   let cache = new Map();
@@ -85,12 +109,12 @@ const createBlock = function() {
             <p class="card-text">Дата выхода: ${value.results[key].released}</p>
             <b class="platforms" id="platforms">Платформы: ${getPlatforms(value)} </b>
             <p class="card-text"><small class="text-muted">Последнее обновление ${value.results[key].updated.split("T", 1)}</small></p>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
               <div class="collapse multi-collapse" id="id${value.results[key].id}">
                 <div class="card text-white bg-dark mb-3">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                  Потом добавлю
                 </div>
-          </div>
+              </div>
         </div>`
       whereToInsert.insertBefore(div, whereToInsert.childNodes[0])
       // console.log(value.results[key])

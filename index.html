@@ -23,12 +23,16 @@
       <p class="lead">На данный момент <b id="quantityGames"></b>игр в базе данных</p>
     </div>
     <div class="input-group input-group-sm mb-3">
-      <input type="text" class="form-control" id="gameNumber" aria-label="Recipient's username"
-        aria-describedby="button-addon2">
-      <button class="btn btn-outline-secondary" type="button" onclick="alert('Will work later')"
-        id="button-addon2">Выполнить</button>
+      <input type="text" class="form-control" id="gameNumber"/>
+      <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#viewgamedata" aria-expanded="false" aria-controls="viewgamedata" id="button-addon2" onclick="getCurrentGameData()">Выполнить</button>
       <!-- <button class="btn btn-primary" onclick="deleteBlock()">Удалить блок</button> -->
     </div>
+  </p>
+  <div class="collapse" id="viewgamedata" style="color: white;">
+    <div class="card card-body">
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+    </div>
+  </div>
 
     <div id="row-before" class="row row-cols-1 row-cols-md-2 g-4">
       <!-- <div class="card bg-dark text-white">
@@ -46,12 +50,12 @@
         </div>
       </div> -->
     </div>
-    <button disabled type="button" id="previousButton" class="btn btn-lg btn-primary"
+    <button disabled type="button" id="previousButton" class="btn btn-lg btn-secondary"
     onclick="updateBlock('previous')" href="#" aria-label="Предыдущая страница">
     <span aria-hidden="true">Предыдущая страница</span>
   </button>
 
-  <button type="button" href="#" class="btn btn-lg btn-primary" onclick="updateBlock('next')" href="#"
+  <button type="button" href="#" class="btn btn-lg btn-secondary" onclick="updateBlock('next')" href="#"
     aria-label="Следующая страница">
     <span aria-hidden="true">Следующая страница</span>
   </button>
