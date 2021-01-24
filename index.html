@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ИгроПоиск | Более 490 тыс. игр</title>
+</head>
+
+<body>
+  <!-- <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div> -->
+
+  <div class="container">
+    <div class="header">
+      <h1 class="display-3">ИгроПОИСК</h1>
+      <p class="lead">На данный момент <b id="quantityGames"></b>игр в базе данных</p>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+      <input type="text" class="form-control" id="gameNumber" aria-label="Recipient's username"
+        aria-describedby="button-addon2">
+      <button class="btn btn-outline-secondary" type="button" onclick="alert('Will work later')"
+        id="button-addon2">Выполнить</button>
+      <!-- <button class="btn btn-primary" onclick="deleteBlock()">Удалить блок</button> -->
+    </div>
+
+    <div id="row-before" class="row row-cols-1 row-cols-md-2 g-4">
+      <!-- <div class="card bg-dark text-white">
+      <img id="image-url" src="https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg" class="card-img" alt="...">
+      <div class="card-img-overlay">
+        <h5 class="card-title" style="background-color: #006eff6b;" id="game-name">Card title</h5>
+      </div>
+      </div> -->
+
+      <!-- <div class="card" style="width: 40%;">
+        <img id="image-url" src="https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg" alt="" class="card-img-top">
+        <div class="card-body">
+          <h2 class="card-title" id="game-name">Destiny 2</h2>
+          <a href="#" class="btn btn-primary">Подробнее</a>
+        </div>
+      </div> -->
+    </div>
+    <button disabled type="button" id="previousButton" class="btn btn-lg btn-primary"
+    onclick="updateBlock('previous')" href="#g" aria-label="Предыдущая страница">
+    <span aria-hidden="true">Предыдущая страница</span>
+  </button>
+
+  <button type="button" class="btn btn-lg btn-primary" onclick="updateBlock('next')" href="#"
+    aria-label="Следующая страница">
+    <span aria-hidden="true">Следующая страница</span>
+  </button>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
