@@ -11,6 +11,7 @@ async function getGamesData(page) {
   let response = await fetch(`https://api.rawg.io/api/games?page=${page}`);
   let data = await response.json();
 
+  console.log(data);
   return data;
 }
 
@@ -106,7 +107,7 @@ const updateBlock = function (getPage) {
           value.results[key].background_image
         }" class="card-img-top game-image" >
         <div class="card-body">
-          <h5 class="card-title game-title">${value.results[key].name}</h5>
+          <h5 class="card-title game-title">${value.results[key].name} ${getRating(value.results[key].metacritic)}</h5>
           <div class="game-info">
             <p class="card-text">Жанр: ${getGenres(value)}</p>
             <p class="card-text">Дата выхода: ${value.results[key].released}</p>
@@ -131,6 +132,13 @@ const updateBlock = function (getPage) {
   });
 };
 
+const getRating = function (data) {
+  let rating = (data > 80) ? '<span id="rating" class="rating_good">'+ data +'</span>' :
+               (data < 40) ? '<span id="rating" class="ratring_bad">' + data + '</span>' :
+               '<span id="rating" class="rating_normal">' + data + '</span>'
+    return rating
+}
+
 const createBlock = function () {
   getFavouritesCount();
   getGamesData(page).then(function (value) {
@@ -143,23 +151,31 @@ const createBlock = function () {
         <div class="card text-white bg-dark mb-3">
           <img id="test" src="${value.results[key].background_image}" class="card-img-top game-image" >
           <div class="card-body">
-            <h5 class="card-title game-title">${value.results[key].name}</h5>
+            <h5 class="card-title game-title">${value.results[key].name} ${getRating(value.results[key].metacritic)} </h5>
             <div class="game-info">
               <p class="card-text">Жанр: ${getGenres(value)}</p>
               <p class="card-text">Дата выхода: ${value.results[key].released}</p>
               <b class="platforms" id="platforms">Платформы: ${getPlatforms(value)}</b>
-              <a class="platforms" href="#" onclick="addToPlayLater(${value.results[key].id})">Хочу пройти! </a>
               <p class="card-text"><small class="text-muted">Последнее обновление ${value.results[key].updated.split("T", 1)}</small></p>
             </div>
-              <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
-              <div class="collapse multi-collapse" id="id${value.results[key].id}">
-                <div class="card text-white bg-dark mb-3">
-                  Потом добавлю
-                </div>
-              </div>
-        </div>`;
+          </div>
+          
+            <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary btn-left"  onclick="addToPlayLater(${value.results[key].id})" style="border-top-left-radius: 0;">В избранное</button>
+              <button type="button" class="btn btn-secondary">Прошёл</button>
+              <button type="button" class="btn btn-secondary btn-right" style="border-top-right-radius: 0;">Хочу пройти</button>
+            </div>
+        </div>  
+        `;
       whereToInsert.insertBefore(div, whereToInsert.childNodes[0]);
       // console.log(value.results[key])
+
+      // <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
+      // <div class="collapse multi-collapse" id="id${value.results[key].id}">
+      //   <div class="card text-white bg-dark mb-3">
+      //     Потом добавлю
+      //   </div>
+      // </div>
     }
     //-----------PRELOADER ПОКА НЕ ЗАГРУЗИТСЯ ИЗОБРАЖЕНИЕ-----
     let img = document.getElementsByTagName("img")[0];

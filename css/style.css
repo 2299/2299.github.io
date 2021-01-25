@@ -229,13 +229,47 @@ input[type="search"] {
   font-size: 12px;
   margin-left: 5px;
 }
+.btn-left {
+  border-top-left-radius: 0;
+}
+.btn-right {
+  border-top-right-radius: 0;
+}
 
+.rating_bad {
+  border: 1px solid #ff2f2f;
+}
+
+.rating_normal {
+  border: 1px solid #f3ff45;
+}
+
+.rating_good {
+  border: 1px solid #ADFF2F;
+}
+
+#rating {
+  float:right;
+  clear:right;
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 500;
+  padding: .5rem;
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+}
 .badge-dark {
   margin: 5px;
   width: 50%;
   height: 50%;
   color: #fff;
 }
+#gameNumber {
+  font-size: 12px;
+}
+
 .badge-dark[href]:focus,
 .badge-dark[href]:hover {
   color: #fff;
