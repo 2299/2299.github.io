@@ -1,6 +1,7 @@
 // window.addEventListener('load',function(){
 //   document.querySelector('body').classList.add("loaded")
 // });
+
 window.onscroll = () => {
   toTopButton();
 };
@@ -10,7 +11,6 @@ async function getGamesData(page) {
   let response = await fetch(`https://api.rawg.io/api/games?page=${page}`);
   let data = await response.json();
 
-  console.log(data);
   return data;
 }
 
@@ -78,6 +78,7 @@ const getCount = function () {
 getCount();
 
 const updateBlock = function (getPage) {
+  window.scrollTo(0, 0);
   let nextPage = getPage == "next" ? (page = page + 1) : (page = page - 1); //Смена страницы
   let whereToInsert = document.getElementById("col-before"); //Ищем, куда добавлять блоки
   let preload = () => document.querySelector("body").classList.add("loaded"); //Функция preloaderа
@@ -100,24 +101,38 @@ const updateBlock = function (getPage) {
       let div = document.createElement("div");
       div.className = "col";
       div.innerHTML = `
-        <div class="card text-white bg-dark mb-3" style="max-width: 18rem">
-          <img src="${
-            value.results[key].background_image
-          }" class="card-img-top" >
-          <div class="card-body">
-            <h5 class="card-title">${value.results[key].name}</h5>
+      <div class="card text-white bg-dark mb-3">
+        <img id="test" src="${
+          value.results[key].background_image
+        }" class="card-img-top game-image" >
+        <div class="card-body">
+          <h5 class="card-title game-title">${value.results[key].name}</h5>
+          <div class="game-info">
+            <p class="card-text">Жанр: ${getGenres(value)}</p>
             <p class="card-text">Дата выхода: ${value.results[key].released}</p>
-            <b class="platforms">Платформы: ${getPlatforms(value)} </b>
+            <b class="platforms" id="platforms">Платформы: ${getPlatforms(value)} </b>
+            <a class="platforms" href="#" onclick="addToPlayLater(${value.results[key].id})">Хочу пройти! </a>
+            <p class="card-text"><small class="text-muted">Последнее обновление ${value.results[key].updated.split("T", 1)}</small></p>
           </div>
-        </div>`;
+            <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
+            <div class="collapse multi-collapse" id="id${value.results[key].id}">
+              <div class="card text-white bg-dark mb-3">
+                Потом добавлю
+              </div>
+            </div>
+      </div>`;
       whereToInsert.insertBefore(div, whereToInsert.childNodes[0]);
-      // console.log(value.results[key])
+      //-----------PRELOADER ПОКА НЕ ЗАГРУЗИТСЯ ИЗОБРАЖЕНИЕ-----
+      let img = document.getElementsByTagName("img")[0];
+      img.onload = () => {
+        document.querySelector("body").classList.add("loaded");
+      };
     }
   });
-  setTimeout(preload, 500);
 };
 
 const createBlock = function () {
+  getFavouritesCount();
   getGamesData(page).then(function (value) {
     for (key in value.results) {
       //-------Создаём и добавляем данные---------------
@@ -126,31 +141,18 @@ const createBlock = function () {
       div.className = "col";
       div.innerHTML = `
         <div class="card text-white bg-dark mb-3">
-          <img src="${
-            value.results[key].background_image
-          }" class="card-img-top game-image" >
+          <img id="test" src="${value.results[key].background_image}" class="card-img-top game-image" >
           <div class="card-body">
             <h5 class="card-title game-title">${value.results[key].name}</h5>
             <div class="game-info">
               <p class="card-text">Жанр: ${getGenres(value)}</p>
-              <p class="card-text">Дата выхода: ${
-                value.results[key].released
-              }</p>
-              <b class="platforms" id="platforms">Платформы: ${getPlatforms(
-                value
-              )} </b>
-              <p class="card-text"><small class="text-muted">Последнее обновление ${value.results[
-                key
-              ].updated.split("T", 1)}</small></p>
+              <p class="card-text">Дата выхода: ${value.results[key].released}</p>
+              <b class="platforms" id="platforms">Платформы: ${getPlatforms(value)}</b>
+              <a class="platforms" href="#" onclick="addToPlayLater(${value.results[key].id})">Хочу пройти! </a>
+              <p class="card-text"><small class="text-muted">Последнее обновление ${value.results[key].updated.split("T", 1)}</small></p>
             </div>
-              <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${
-                value.results[key].id
-              }" aria-expanded="false" aria-controls="id${
-        value.results[key].id
-      }">Подробнее</button>
-              <div class="collapse multi-collapse" id="id${
-                value.results[key].id
-              }">
+              <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
+              <div class="collapse multi-collapse" id="id${value.results[key].id}">
                 <div class="card text-white bg-dark mb-3">
                   Потом добавлю
                 </div>
@@ -159,22 +161,79 @@ const createBlock = function () {
       whereToInsert.insertBefore(div, whereToInsert.childNodes[0]);
       // console.log(value.results[key])
     }
+    //-----------PRELOADER ПОКА НЕ ЗАГРУЗИТСЯ ИЗОБРАЖЕНИЕ-----
+    let img = document.getElementsByTagName("img")[0];
+    img.onload = () => {
+      document.querySelector("body").classList.add("loaded");
+    };
   });
 };
 
+function showFavourites() {
+  let names = [];
+  for (let key in localStorage) {
+    if (!localStorage.hasOwnProperty(key)) {
+      continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+    }
+    let obj = JSON.parse(localStorage.getItem(key));
+    if (obj.hasOwnProperty("name")) {
+      names.push(obj.name);
+    }
+  }
+  alert("Ваши игры - " + names.join(", "));
+}
+
+function getFavouritesCount() {
+  let count = 0;
+  let changedSpan = document.getElementsByTagName("span")[0];
+  for (let key in localStorage) {
+    if (!localStorage.hasOwnProperty(key)) {
+      continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+    }
+    count++;
+  }
+  if (count != 0) {
+    changedSpan.innerHTML = count;
+  } else {
+    changedSpan.remove();
+  }
+}
+
+let addToPlayLater = function (id) {
+  let gameId = id;
+  const toJSON = function (data) {
+    if (localStorage.getItem(gameId) !== null) {
+      alert("Эта игра уже добавлена");
+    } else {
+      let serialObj = JSON.stringify(data);
+      localStorage.setItem(gameId, serialObj);
+      let returnObj = JSON.parse(localStorage.getItem(gameId));
+      getFavouritesCount();
+      alert("Вы успешно добавили " + returnObj.name + " в избранное");
+      return returnObj;
+    }
+  };
+  const url = "https://api.rawg.io/api/games/";
+
+  fetch(url + gameId)
+    .then((response) => response.json())
+    .then((data) => toJSON(data));
+};
+
 const toTopButton = () => {
-  const button = document.getElementById("myBtn")
-  const condition = (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
-    ? (button.style.visibility = "visible")
-    : (button.style.visibility = "hidden");
+  const button = document.getElementById("myBtn");
+  const condition =
+    document.body.scrollTop > 20 || document.documentElement.scrollTop > 20
+      ? (button.style.visibility = "visible")
+      : (button.style.visibility = "hidden");
 };
 
 const getGenres = function (value) {
   let genres = [];
   for (keyS in value.results[key].genres) {
-    genres = value.results[key].genres[keyS].name + " " + genres;
+    genres.push(value.results[key].genres[keyS].name);
   }
-  return genres;
+  return genres.join(", ");
 };
 
 const getPlatforms = function (value) {

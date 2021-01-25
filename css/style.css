@@ -214,3 +214,31 @@ input[type="search"] {
 #myBtn:focus {
   border: 0;
 }
+/* 
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  
+} */
+.btn-top {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.badge-dark {
+  margin: 5px;
+  width: 50%;
+  height: 50%;
+  color: #fff;
+}
+.badge-dark[href]:focus,
+.badge-dark[href]:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #1d2124;
+}

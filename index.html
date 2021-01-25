@@ -11,20 +11,22 @@
 </head>
 
 <body>
-  <!-- <div id="loader-wrapper">
+  <div id="loader-wrapper">
     <div id="loader"></div>
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
-  </div> -->
+  </div>
 
   <nav class="navbar navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand logo">ИгроПОИСК</a>
       <form class="d-flex">
         <input class="form-control me-2 input-search" type="search" id="gameNumber">
-        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#viewgamedata"
+        <button class="btn btn-top btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#viewgamedata"
           aria-expanded="false" aria-controls="viewgamedata" id="button-addon2"
           onclick="getCurrentGameData()">Найти</button>
+          <button type="button" class="btn btn-top btn-outline-secondary" onclick="showFavourites()">Избранное<span class="badge-dark"></span>
+          </button>
       </form>
     </div>
   </nav>
