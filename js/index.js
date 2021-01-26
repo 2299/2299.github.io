@@ -14,45 +14,62 @@ async function getGamesData(page) {
   console.log(data);
   return data;
 }
+//https://api.rawg.io/api/games?search=%27dota%202%27&search_exact=%27true%27
 
-let getCurrentGameData = function () {
-  const url = "https://api.rawg.io/api/games/";
-  const form = document.getElementsByTagName("form")[0];
-  let id = document.getElementById("gameNumber").value;
-  form.reset();
-  fetch(url + id)
-    .then((response) => response.json())
-    .then(
-      (data) =>
-        (document.getElementById(
-          "viewgamedata"
-        ).innerHTML = `<div class="card text-white bg-dark mb-3" style="">
-      <img src="${data.background_image}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">${data.name}</h5>
-        <p class="card-text">${data.description}</p>
-      </div>
-      <ul class="list-group list-group-flush ">
-        <li class="list-group-item text-white bg-dark">Рейтинг сайта - ${
-          data.rating
-        } </li>
-      </ul>
-      <div class="card-body">
-        <a href="${
-          data.website.length > 1
-            ? data.website + '"class="card-link">Ссылка на сайт игры</a>'
-            : '#"class="card-link">Нет веб-сайта </a>'
-        }
-        <a href="${
-          data.metacritic_url.length > 1
-            ? data.metacritic_url +
-              '"class="card-link">Ссылка на MetaCritic</a> '
-            : '#"class="card-link">Нет страницы на Metacritic </a>'
-        } 
-      </div>
-    </div>`)
-    );
-};
+let timer,
+  timeoutVal = 1000;
+const gameName = document.getElementById("gameNumber");
+const search = document.getElementById("showSearch");
+gameName.addEventListener("keypress", handleKeyPress);
+gameName.addEventListener("keyup", handleKeyUp);
+
+document.addEventListener('click', event => {
+  search.classList.remove('show');
+});
+function handleKeyUp(e) {
+  window.clearTimeout(timer);
+  timer = window.setTimeout(() => {
+    if (gameName.value.length < 3) {
+      console.log('malo');
+    }
+    else {
+    const url = `https://api.rawg.io/api/games?search=${gameName.value}&search_exact=true`;
+    const form = document.getElementsByTagName("form")[0];
+    search.classList.add('show');
+    form.reset()
+    console.log(url);
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => drawData(data)
+      )};
+  }, timeoutVal);
+}
+
+
+
+function drawData (data) {
+  let whereToInsert = document.getElementById("showSearch"); //Ищем, куда добавлять блоки
+  let countTags =  whereToInsert.getElementsByTagName('a').length;
+  if (countTags > 0){
+    for (let i = 0; i < countTags; i++) {
+      whereToInsert.removeChild(whereToInsert.childNodes[0]);
+    }
+  }
+
+  for (key in data.results) {
+    console.log(data.results[key].name);
+    //-----------Добавление новых данных---------------
+    let li = document.createElement("li");
+    li.innerHTML = `<a class="dropdown-item" style="font-size: 12px;" href="${data.results[key].background_image}">${data.results[key].name}</a>`;
+    whereToInsert.insertBefore(li, whereToInsert.childNodes[0]);
+  }
+}
+
+function handleKeyPress(e) {
+  window.clearTimeout(timer);
+
+  console.log("Typing...");
+}
 //Декоратор для загрузки данных с https://api.rawg.io/api/games
 function cachingDecorator(func) {
   let cache = new Map();
@@ -115,7 +132,7 @@ const updateBlock = function (getPage) {
             <a class="platforms" href="#" onclick="addToPlayLater(${value.results[key].id})">Хочу пройти! </a>
             <p class="card-text"><small class="text-muted">Последнее обновление ${value.results[key].updated.split("T", 1)}</small></p>
           </div>
-            <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
+            <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">В избранное</button>
             <div class="collapse multi-collapse" id="id${value.results[key].id}">
               <div class="card text-white bg-dark mb-3">
                 Потом добавлю
@@ -135,6 +152,7 @@ const updateBlock = function (getPage) {
 const getRating = function (data) {
   let rating = (data > 80) ? '<span id="rating" class="rating_good">'+ data +'</span>' :
                (data < 40) ? '<span id="rating" class="ratring_bad">' + data + '</span>' :
+               (data == 'null') ? '<span id="rating" class="rating_bad"> 0 </span>' :
                '<span id="rating" class="rating_normal">' + data + '</span>'
     return rating
 }
