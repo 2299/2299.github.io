@@ -192,7 +192,6 @@ body {
 }
 
 input[type="search"] {
-  width: 30rem; 
   border-radius: 25px;
   -webkit-transition: .35s ease-in-out;
   transition:  .35s ease-in-out;
