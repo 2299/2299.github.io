@@ -34,9 +34,7 @@ function handleKeyUp(e) {
     }
     else {
     const url = `https://api.rawg.io/api/games?search=${gameName.value}&search_exact=true`;
-    const form = document.getElementsByTagName("form")[0];
     search.classList.add('show');
-    form.reset()
     console.log(url);
     fetch(url)
       .then((response) => response.json())
