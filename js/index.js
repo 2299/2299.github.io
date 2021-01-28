@@ -44,7 +44,6 @@ function handleKeyUp(e) {
 }
 
 
-
 function drawData (data) {
   let whereToInsert = document.getElementById("showSearch"); //Ищем, куда добавлять блоки
   let countTags =  whereToInsert.getElementsByTagName('a').length;

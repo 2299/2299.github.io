@@ -32,7 +32,7 @@ function showFavourites() {
           </div>  
           `;
         whereToInsert.appendChild(div);
-        // console.log(value.results[key])
+        // console.log(value.r esults[key])
   
         // <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
         // <div class="collapse multi-collapse" id="id${value.results[key].id}">
@@ -165,7 +165,7 @@ function getDate() {
     let min = String(today.getMinutes()).padStart(2, '0');
     let yyyy = today.getFullYear();
 
-    today = dd + '/' + mm + '/' + yyyy + ', ' + hh + ':' + min + ' (MSK)';
+    today = dd + '/' + mm + '/' + yyyy + ', ' + hh + ':' + min;
     console.log(today)
 }
 getFavouritesCount();
