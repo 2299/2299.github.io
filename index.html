@@ -17,18 +17,31 @@
     <div class="loader-section section-right"></div>
   </div>
 
-  <nav class="navbar navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand logo">ИгроПОИСК</a>
-      <div class="dropdown">
-      <div class="d-flex">
-        <input class="form-control me-2 input-search" type="search" id="gameNumber">
+      <a class="navbar-brand logo" href="index.html">ИгроПОИСК</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Избранное</a>
+          </li>
+        </ul> -->
+        <div class="container-fluid">
+          <input class="form-control me-2 input-search" type="search" id="gameNumber">
           <ul class="dropdown-menu" id="showSearch" aria-labelledby="dropdownMenuButton">
           </ul>
-          <button class="btn btn-top btn-outline-secondary" onclick="showFavourites()">Избранное<span class="badge-dark"></span>
-          </button>
         </div>
-    </div>
+        <a class="btn btn-top btn-outline-secondary" href="./my_library.html">Избранное<span class="badge-dark"
+            id="favourite-counter"></span>
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -47,25 +60,21 @@
       <h5 class="display-4 header-text">ИгроПОИСК</h5>
       <p class="lead subheader-text">Добавляй в избранное, комментируй, делись с друзьями!</p>
     </div>
-    <div class="collapse" id="viewgamedata" style="color: white;">
-      <div class="card card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
-        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-      </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="col-before">
     </div>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4" id="col-before"></div>
-    <!-- Buttons -->
-    <div class="btn-group" role="group" aria-label="Basic outlined example">
-      <button disabled type="button" id="previousButton" class="btn btn-lg btn-secondary"
-        onclick="updateBlock('previous')" href="#" aria-label="Предыдущая страница">
-        <span aria-hidden="true">Предыдущая страница</span>
-      </button>
-      <!-- ----------------- -->
-      <button type="button" href="#" class="btn btn-lg btn-secondary" onclick="updateBlock('next')" href="#"
-        aria-label="Следующая страница">
-        <span aria-hidden="true">Следующая страница</span>
-      </button>
+    <div class="row mt-5">
+      <!-- Buttons -->
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button disabled type="button" id="previousButton" class="btn btn-lg btn-secondary"
+          onclick="updateBlock('previous')" href="#" aria-label="Предыдущая страница">
+          <span aria-hidden="true">Предыдущая страница</span>
+        </button>
+        <!-- ----------------- -->
+        <button type="button" href="#" class="btn btn-lg btn-secondary" onclick="updateBlock('next')" href="#"
+          aria-label="Следующая страница">
+          <span aria-hidden="true">Следующая страница</span>
+        </button>
+      </div>
     </div>
 
     <footer class="text-muted py-5 footer">
@@ -86,7 +95,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

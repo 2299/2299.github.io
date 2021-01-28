@@ -238,15 +238,8 @@ input[type="search"] {
 } */
 .btn-top {
   font-size: 12px;
-  margin-left: 5px;
-}
-.btn-left {
-  border-top-left-radius: 0;
-}
-.btn-right {
-  border-top-right-radius: 0;
-}
 
+}
 .rating_bad {
   border: 1px solid #ff2f2f;
 }
@@ -279,6 +272,7 @@ input[type="search"] {
 }
 #gameNumber {
   font-size: 12px;
+  margin: 1rem auto;
 }
 
 .badge-dark[href]:focus,

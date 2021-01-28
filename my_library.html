@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИгроПоиск | Более 490 тыс. игр</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand logo" href="index.html">ИгроПОИСК</a>
+            <div class="collapse navbar-collapse">
+                <input class="form-control me-2 input-search" type="search" id="gameNumber">
+                <ul class="dropdown-menu" id="showSearch" aria-labelledby="dropdownMenuButton">
+                </ul>
+                <button class="btn btn-top btn-outline-secondary" onclick="showFavourites()">Избранное<span
+                        class="badge-dark"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="header">
+            <h5 class="display-4 header-text">ИгроПОИСК</h5>
+            <p class="lead subheader-text">Добавляй в избранное, комментируй, делись с друзьями!</p>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Избранное</li>
+            </ol>
+        </nav>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="col-before">
+            </div>
+        </div>
+        <footer class="text-muted py-5 footer">
+            <hr>
+            <div class="container">
+                <p class="float-end mb-1">
+                    <a href="#">Наверх</a>
+                </p>
+                <p class="mb-1">GamePOISK. Created via API <a href="rawg.io">RAWG.IO </a></p>
+                <p class="mb-0">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+                        href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+            </div>
+        </footer>
+    </div>
+    <!-- -----------------SCRIPTS------------------------- -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/my_library.js"></script>
+    <!-- ------------------------------------------------- -->
+</body>
+
+</html>
