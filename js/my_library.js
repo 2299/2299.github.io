@@ -2,49 +2,62 @@ function showFavourites() {
   let count = 0;
   let names = [];
   for (let key in localStorage) {
-    if (!localStorage.hasOwnProperty(key)) {
+    if (!localStorage.hasOwnProperty(key) || key == "order_filter") {
       continue; // need to skip 'setItems' , 'getItem' etc . . .
     }
     let value = JSON.parse(localStorage.getItem(key));
     console.log(value);
-        // --------------- Create and insert new data ---------------
-        let div = document.createElement("div");
-        let whereToInsert = document.getElementById("col-before");
-        div.className = "col";
-        div.innerHTML = `
+    // --------------- Create and insert new data ---------------
+    let div = document.createElement("div");
+    let whereToInsert = document.getElementById("col-before");
+    div.className = "col";
+    div.innerHTML = `
           <div class="card text-white bg-dark h-100">
-            <img id="test" src="${value.background_image}" class="card-img-top game-image" >
+            <img id="test" src="${
+              value.background_image
+            }" class="card-img-top game-image" >
             <div class="card-body">
-              <h5 class="card-title game-title">${value.name} ${getRating(value.metacritic)} </h5>
+              <h5 class="card-title game-title">${value.name} ${getRating(
+      value.metacritic
+    )} </h5>
               <div class="game-info">
                 <p class="card-text">Жанр: ${getGenres(value)}</p>
                 <p class="card-text">Дата выхода: ${value.released}</p>
-                <b class="platforms" id="platforms">Платформы: ${getPlatforms(value)}</b>
-                <p class="card-text"><small class="text-muted">Добавлено ${value.whenAdded}</small></p>
+                <b class="platforms" id="platforms">Платформы: ${getPlatforms(
+                  value
+                )}</b>
+                <p class="card-text"><small class="text-muted">Добавлено ${
+                  value.whenAdded
+                }</small></p>
               </div>
             </div>
             
             <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
             <button type="button" style="font-size: 0.875rem;" onclick="localStorage.removeItem(${
-                value.id
-              }); document.location.reload()" class="btn btn-secondary">Удалить из избранного</button>
+              value.id
+            }); document.location.reload()" class="btn btn-secondary">Удалить из избранного</button>
             </div>
           </div>  
           `;
-        whereToInsert.appendChild(div);
-        // console.log(value.r esults[key])
-  
-        // <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
-        // <div class="collapse multi-collapse" id="id${value.results[key].id}">
-        //   <div class="card text-white bg-dark mb-3">
-        //     Потом добавлю
-        //   </div>
-        // </div>
+    whereToInsert.appendChild(div);
+    // console.log(value.r esults[key])
+
+    // <button class="btn btn-secondary detailed-info" type="button" data-bs-toggle="collapse" data-bs-target="#id${value.results[key].id}" aria-expanded="false" aria-controls="id${value.results[key].id}">Подробнее</button>
+    // <div class="collapse multi-collapse" id="id${value.results[key].id}">
+    //   <div class="card text-white bg-dark mb-3">
+    //     Потом добавлю
+    //   </div>
+    // </div>
 
     // if (obj.hasOwnProperty("name")) {
     //   names.push(obj.name);
     //   count++;
     // }
+    count++;
+  }
+  if (count == 0) {
+    alert("gamez  net");
+    document.location.href = 'index.html'
   }
 }
 
@@ -52,7 +65,7 @@ function getFavouritesCount() {
   let count = 0;
   let changedSpan = document.getElementsByTagName("span")[0];
   for (let key in localStorage) {
-    if (!localStorage.hasOwnProperty(key)) {
+    if (!localStorage.hasOwnProperty(key) || key == 'order_filter') {
       continue;
     }
     count++;
@@ -68,7 +81,7 @@ function getFavouritesCount() {
     let count = 0;
     let changedSpan = document.getElementsByTagName("span")[0];
     for (let key in localStorage) {
-      if (!localStorage.hasOwnProperty(key)) {
+      if (!localStorage.hasOwnProperty(key) || key == 'order_filter') {
         continue;
       }
       count++;

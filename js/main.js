@@ -1,7 +1,8 @@
 let page = 1;
+let order = localStorage.getItem('order_filter')
 // --------------- GET DATA FROM RAWG API !!!!! ---------------/
 async function getGamesData(page) {
-  let response = await fetch(`https://api.rawg.io/api/games?page=${page}`);
+  let response = await fetch(`https://api.rawg.io/api/games?page=${page}&ordering=${order}`);
   let data = await response.json();
 
   console.log(data);
@@ -73,9 +74,12 @@ getGamesData = cachingDecorator(getGamesData);
 // --------------- Update page witn new data ---------------/
 const updateBlock = function (getPage) {
   window.scrollTo(0, 0);
-  let nextPage = getPage == "next" ? (page = page + 1) : (page = page - 1); // change page
+  let nextPage = (
+                 getPage == "next" ? page = page + 1 : 
+                 getPage == "previous" ? page = page - 1 : 
+                 page 
+                 )// change page
   let whereToInsert = document.getElementById("col-before"); //
-  let getItem = document.getElementById('')
 
   const button = document.getElementById("previousButton");
   if (page > 1) {
@@ -95,7 +99,7 @@ const updateBlock = function (getPage) {
       div.className = "col";
       div.innerHTML = `
       <div class="card text-white bg-dark h-100">
-        <img id="test" src="${value.results[key].background_image}" class="card-img-top game-image" >
+        <img id="test" src="${value.results[key].background_image}" class="card-img-top game-image" alt="...">
           <div class="card-body">
             <h5 class="card-title game-title">${value.results[key].name} ${getRating(value.results[key].metacritic)} </h5>
             <div class="game-info">
@@ -123,6 +127,27 @@ const updateBlock = function (getPage) {
   });
 };
 
+const orderbyFilter = function (order) {
+  switch (order) {
+    case 'popularity':
+      localStorage.setItem('order_filter', '');
+      break;
+
+    case 'name':
+      localStorage.setItem('order_filter', 'name&metacritic=70,100&dates=2010-01-01,2022-12-31');
+      break;
+    
+    case 'released':
+      localStorage.setItem('order_filter', '-released&metacritic=70,100');
+      break;
+
+    case 'metacritic':
+      localStorage.setItem('order_filter', '-metacritic&metacritic=85,100');
+      break;
+  }
+  document.location.reload()
+}
+
 // --------------- Get the games and show them ---------------/
 const createBlock = function () {
   getFavouritesCount();
@@ -134,7 +159,7 @@ const createBlock = function () {
       div.className = "col";
       div.innerHTML = `
         <div class="card text-white bg-dark h-100">
-          <img id="test" src="${value.results[key].background_image}" class="card-img-top game-image" >
+          <img id="test" src="${value.results[key].background_image}" class="card-img-top game-image" alt="...">
           <div class="card-body">
             <h5 class="card-title game-title">${value.results[key].name} ${getRating(value.results[key].metacritic)} </h5>
             <div class="game-info">
@@ -173,7 +198,7 @@ const createBlock = function () {
 function showFavourites() {
   let names = [];
   for (let key in localStorage) {
-    if (!localStorage.hasOwnProperty(key)) {
+    if (!localStorage.hasOwnProperty(key) && !localStorage.getItem('order_filter')){
       continue; // need to skip 'setItems' , 'getItem' etc . . .
     }
     let obj = JSON.parse(localStorage.getItem(key));
@@ -188,9 +213,11 @@ function getFavouritesCount() {
   let count = 0;
   let changedSpan = document.getElementById("favourite-counter");
   for (let key in localStorage) {
-    if (!localStorage.hasOwnProperty(key)) {
+    if (!localStorage.hasOwnProperty(key) || key == 'order_filter') {
       continue;
     }
+    console.log(key);
+
     count++;
   }
   if (count != 0) {
@@ -292,7 +319,7 @@ function getDate() {
   let min = String(today.getMinutes()).padStart(2, '0');
   let yyyy = today.getFullYear();
 
-  today = dd + '/' + mm + '/' + yyyy + ', ' + hh + ':' + min + ' (MSK)';
+  today = dd + '/' + mm + '/' + yyyy + ', ' + hh + ':' + min;
   return today
 }
 
@@ -312,8 +339,8 @@ const addToFavourites = function (id) {
       data["whenAdded"] = currentTime;
       let serialObj = JSON.stringify(data);
       localStorage.setItem(gameId, serialObj);
-      getFavouritesCount();
       alert("Вы успешно добавили " + data.name + " в избранное");
+      getFavouritesCount();
     }
   };
 };

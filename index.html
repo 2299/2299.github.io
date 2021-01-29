@@ -17,6 +17,7 @@
     <div class="loader-section section-right"></div>
   </div>
 
+<header class="mb-auto">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand logo" href="index.html">ИгроПОИСК</a>
@@ -44,21 +45,32 @@
       </div>
     </div>
   </nav>
+</header>
 
+<main class="inner cover" role="main">
   <div class="container">
-    <!-- <header class="header">
-      <h5 class="display-4">ИгроПОИСК</h5>
-      <p class="lead">На данный момент <b id="quantityGames"></b>игр в базе данных</p>
-      <div class="input-group input-group-sm mb-3">
-        <input type="text" class="form-control" id="gameNumber" />
-        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#viewgamedata"
-          aria-expanded="false" aria-controls="viewgamedata" id="button-addon2"
-          onclick="getCurrentGameData()">Выполнить</button>
+    <div class="container-heading">
+      <h5 class="display-4 container-heading-text">ИгроПОИСК</h5>
+      <p class="lead subheading-text">Добавляй в избранное, комментируй, делись с друзьями!</p>
+      <div class="filter_selects">
+        <div class="filter_order_by">
+          <select class="form-select" id="orderby-filter" onchange="orderbyFilter(this.value)" aria-label="Default select example">
+            <option value="" selected disabled">Сортировать по:</option>
+            <option value="popularity">По популярности</option>
+            <option value="released">По дате</option>
+            <option value="name">По имени</option>
+            <option value="metacritic">По оценкам</option>
+          </select>
+        </div>
+        <div class="filter_platforms">
+          <select class="form-select" onchange="alert('Не работает, но вы выбрали '+this.value+' и всё скоро будет работать')" aria-label="Default select example">
+            <option selected>Платформы</option>
+            <option value="PC">PC</option>
+            <option value="Playstation">Playstation</option>
+            <option value="Xbox">Xbox</option>
+          </select>
+        </div>
       </div>
-    </header> -->
-    <div class="header">
-      <h5 class="display-4 header-text">ИгроПОИСК</h5>
-      <p class="lead subheader-text">Добавляй в избранное, комментируй, делись с друзьями!</p>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4" id="col-before">
     </div>
@@ -76,19 +88,20 @@
         </button>
       </div>
     </div>
-
-    <footer class="text-muted py-5 footer">
-      <hr>
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Наверх</a>
-        </p>
-        <p class="mb-1">GamePOISK. Created via API <a href="rawg.io">RAWG.IO </a></p>
-        <p class="mb-0">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
-            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
-      </div>
-    </footer>
   </div>
+</main>
+
+<footer class="text-muted py-5 footer">
+  <hr>
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Наверх</a>
+    </p>
+    <p class="mb-1">GamePOISK. Created via API <a href="rawg.io">RAWG.IO </a></p>
+    <p class="mb-0">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+        href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+  </div>
+</footer>
   <a class="btn btn-secondary" href="#" id="myBtn" role="button">
     <img src="/img/up-arrow.svg" alt="...">
   </a>

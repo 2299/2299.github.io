@@ -1,4 +1,4 @@
-.header {
+.container-heading {
   color: #fff;
 }
 body {
@@ -8,14 +8,27 @@ body {
   font-weight: 700;
   text-transform: uppercase;
 }
-.header-text {
-  font-size: 58px;
-  font-weight: 700;
-  letter-spacing: 0em;
+.container-heading-text {
+  font-size: 2.5rem;
+  font-weight: 800;
 }
-.subheader-text {
-  font-size: 18px;
-  font-weight: 400;
+.subheading-text {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+.breadcrumb > .breadcrumb-item > a {
+  font-size: 14px;
+}
+
+.filter_selects {
+  display: flex;
+  margin: 2rem auto;
+}
+.filter_selects select {
+  font-size: 14px;
+}
+.filter_order_by {
+  margin-right: 0.5rem !important;
 }
 
 .game-title {
