@@ -1,15 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Выбор</title>
+  <title>ИгроПоиск | Более 490 тыс. игр</title>
 </head>
+
 <body>
-  <ul>
-    <li><a href="./with-bootstrap/index.html">С помощью фреймворка Bootstrap</a></li>
-    <li><a href="./without-bootstrap/index.html">Демонстрация собственной вёрстки (без функционала и адаптива)</a></li>
-  </ul>
-  
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+
+<header class="mb-auto">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand logo" href="index.html">ИгроПОИСК</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Избранное</a>
+          </li>
+        </ul> -->
+        <div class="container-fluid">
+          <input class="form-control me-2 input-search" type="search" id="gameNumber">
+          <ul class="dropdown-menu" id="showSearch" aria-labelledby="dropdownMenuButton">
+          </ul>
+        </div>
+        <a class="btn btn-top btn-outline-secondary" href="./my_library.html">Избранное<span class="badge-dark"
+            id="favourite-counter"></span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="inner cover" role="main">
+  <div class="container">
+    <div class="container-heading">
+      <h5 class="display-4 container-heading-text">ИгроПОИСК</h5>
+      <p class="lead subheading-text">Добавляй в избранное, комментируй, делись с друзьями!</p>
+      <div class="filter_selects">
+        <div class="filter_order_by">
+          <select class="form-select" id="orderby-filter" onchange="orderbyFilter(this.value)" aria-label="Default select example">
+            <option value="" selected disabled">Сортировать по:</option>
+            <option value="popularity">По популярности</option>
+            <option value="released">По дате</option>
+            <option value="name">По имени</option>
+            <option value="metacritic">По оценкам</option>
+          </select>
+        </div>
+        <div class="filter_platforms">
+          <select class="form-select" onchange="alert('Не работает, но вы выбрали '+this.value+' и всё скоро будет работать')" aria-label="Default select example">
+            <option selected>Платформы</option>
+            <option value="PC">PC</option>
+            <option value="Playstation">Playstation</option>
+            <option value="Xbox">Xbox</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="col-before">
+    </div>
+    <div class="row mt-5">
+      <!-- Buttons -->
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button disabled type="button" id="previousButton" class="btn btn-lg btn-secondary"
+          onclick="updateBlock('previous')" href="#" aria-label="Предыдущая страница">
+          <span aria-hidden="true">Предыдущая страница</span>
+        </button>
+        <!-- ----------------- -->
+        <button type="button" href="#" class="btn btn-lg btn-secondary" onclick="updateBlock('next')" href="#"
+          aria-label="Следующая страница">
+          <span aria-hidden="true">Следующая страница</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="text-muted py-5 footer">
+  <hr>
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Наверх</a>
+    </p>
+    <p class="mb-1">GamePOISK. Created via API <a href="rawg.io">RAWG.IO </a></p>
+    <p class="mb-0">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+        href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+  </div>
+</footer>
+  <a class="btn btn-secondary" href="#" id="myBtn" role="button">
+    <img src="/img/up-arrow.svg" alt="...">
+  </a>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>
